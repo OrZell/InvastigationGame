@@ -10,6 +10,6 @@ namespace InvastigationGame.ProgramStaticData
     {
         public static Dictionary<string, int> TypesAndMuchSensors = new Dictionary<string, int> { { "private", 2 } };
 
-        public static List<string> TypesOfSensors = new List<string> { { "movement"}, { "lighting"}, { "selolar"} }
+        public static List<string> TypesOfSensors = new List<string> { { "movement" }, { "lighting" }, { "selolar" } };
     }
 }

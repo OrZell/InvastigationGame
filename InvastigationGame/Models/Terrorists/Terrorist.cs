@@ -16,8 +16,8 @@ namespace InvastigationGame.Models.Terrorists
             set { _WeaknesSensors = value; }
         }
 
-        private List<Sensor> _Touched;
-        public List<Sensor> Touched
+        private List<string> _Touched;
+        public List<string> Touched
         {
             get { return _Touched; }
             set { _Touched = value; }

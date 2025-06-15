@@ -14,6 +14,7 @@ namespace InvastigationGame.Generators
             int manySens = ProgramStaticData.StaticData.TypesAndMuchSensors["private"];
             Terrorist terrorist = new PrivateTerrorist();
             terrorist.WeaknesSensors = GeneraorSensor.GenerateSomeRandomSensors(manySens);
+            terrorist.Touched = new List<string>();
             return terrorist;
         }
     }
