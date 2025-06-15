@@ -9,18 +9,18 @@ namespace InvastigationGame.Models.Sensors
     public class Sensor
     {
         protected string _Type;
-        //public string Type
-        //{
-        //    get { return _Type; }
-        //    set { _Type = value; }
-        //}
+        public string Type
+        {
+            get { return _Type; }
+            set { _Type = value; }
+        }
 
         protected bool _Activate;
-        //public bool Activate
-        //{
-        //    get { return _Activate; }
-        //    set { _Activate = value; }
-        //}
+        public bool Activate
+        {
+            get { return _Activate; }
+            set { _Activate = value; }
+        }
 
         public Sensor(string type)
         {
