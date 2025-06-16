@@ -1,9 +1,4 @@
 ﻿using InvastigationGame.Models.Sensors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvastigationGame.Models.Terrorists
 {
@@ -16,8 +11,8 @@ namespace InvastigationGame.Models.Terrorists
             set { _WeaknesSensors = value; }
         }
 
-        private List<string> _Touched;
-        public List<string> Touched
+        private List<Sensor> _Touched;
+        public List<Sensor> Touched
         {
             get { return _Touched; }
             set { _Touched = value; }
