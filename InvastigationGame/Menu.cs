@@ -54,10 +54,10 @@ namespace InvastigationGame
         {
             foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
             {
-                if (!sensor.Activate && sensor.Type == type)
+                if (!sensor.Active && sensor.Type == type)
                 {
                     this.Terrorist.Touched.Add(type);
-                    sensor.Active();
+                    sensor.Activate();
                     break;
                 }
             }
