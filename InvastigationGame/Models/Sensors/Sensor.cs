@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace InvastigationGame.Models.Sensors
+﻿namespace InvastigationGame.Models.Sensors
 {
     public class Sensor
     {
@@ -28,7 +22,12 @@ namespace InvastigationGame.Models.Sensors
             this._Active = false;
         }
 
-        public void Activate()
+        public virtual bool IsActive()
+        {
+            return this._Active;
+        }
+
+        public virtual void Activate()
         {
             this._Active = true;
         }

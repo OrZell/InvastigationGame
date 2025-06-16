@@ -1,9 +1,4 @@
 ﻿using InvastigationGame.Models.Sensors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvastigationGame.Generators
 {
@@ -25,6 +20,10 @@ namespace InvastigationGame.Generators
 
                 case "selolar":
                     sensor = new SelolarSensor();
+                    break;
+
+                case "pulse":
+                    sensor = new PulseSensor();
                     break;
 
                 default:

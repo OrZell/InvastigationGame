@@ -1,11 +1,6 @@
 ﻿using InvastigationGame.Generators;
 using InvastigationGame.Models.Sensors;
 using InvastigationGame.Models.Terrorists;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvastigationGame
 {
@@ -14,7 +9,7 @@ namespace InvastigationGame
         private Terrorist Terrorist;
         public Menu()
         {
-            this.Terrorist = GeneratorTerrorist.GeneartePrivateTerrorist();
+            this.Terrorist = GeneratorTerrorist.GenerateRandomTerrorist();
         }
 
         public void MainMenu()
@@ -25,7 +20,8 @@ namespace InvastigationGame
                 Console.WriteLine("Guess The Sensor:\n" +
                   "1. Movement\n" +
                   "2. Lighting\n" +
-                  "3. Selolar");
+                  "3. Selolar\n" +
+                  "4. Pulse");
                 string input = Console.ReadLine()!;
 
                 switch (input)
@@ -42,6 +38,10 @@ namespace InvastigationGame
                         sign = Flow("selolar");
                         break;
 
+                    case "4":
+                        sign = Flow("pulse");
+                        break;
+
                     default:
                         Console.WriteLine("Wrong choice");
                         break;
@@ -49,14 +49,24 @@ namespace InvastigationGame
             }
             while (sign);
         }
+        public bool Flow(string type)
+        {
+            int[] nums = new int[2];
+
+            Guess(type);
+            UpdateTheTouched();
+            nums = CheckLens();
+            Console.WriteLine($"You got {nums[0]} / {nums[1]}");
+            return CheckIfTouched(nums);
+        }
 
         public void Guess(string type)
         {
+            UpdateThePulseSensors();
             foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
             {
-                if (!sensor.Active && sensor.Type == type)
+                if (sensor.Type == type && !sensor.Active)
                 {
-                    this.Terrorist.Touched.Add(type);
                     sensor.Activate();
                     break;
                 }
@@ -81,14 +91,29 @@ namespace InvastigationGame
             return sign;
         }
 
-        public bool Flow(string type)
+        public void UpdateTheTouched()
         {
-            int[] nums = new int[2];
+            this.Terrorist.Touched.Clear();
+            foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
+            {
+                if (sensor.Active == true)
+                {
+                    this.Terrorist.Touched.Add(sensor);
+                }
+            }
+        }
 
-            Guess(type);
-            nums = CheckLens();
-            Console.WriteLine($"You got {nums[0]} / {nums[1]}");
-            return CheckIfTouched(nums);
+        private void UpdateThePulseSensors()
+        {
+            foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
+            {
+                if (sensor is PulseSensor && sensor.Active)
+                {
+                    PulseSensor psensor = (PulseSensor)sensor;
+                    psensor.Countering();
+                    break;
+                }
+            }
         }
     }
 }
