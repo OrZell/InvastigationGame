@@ -15,22 +15,22 @@ namespace InvastigationGame.Models.Sensors
             set { _Type = value; }
         }
 
-        protected bool _Activate;
-        public bool Activate
+        protected bool _Active;
+        public bool Active
         {
-            get { return _Activate; }
-            set { _Activate = value; }
+            get { return _Active; }
+            set { _Active = value; }
         }
 
         public Sensor(string type)
         {
             this._Type = type;
-            this._Activate = false;
+            this._Active = false;
         }
 
-        public void Active()
+        public void Activate()
         {
-            this._Activate = true;
+            this._Active = true;
         }
     }
 }
