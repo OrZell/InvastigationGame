@@ -1,21 +1,53 @@
 ﻿using InvastigationGame.Models.Sensors;
 using InvastigationGame.Models.Terrorists;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace InvastigationGame.Generators
 {
     public class GeneratorTerrorist
     {
+        public static Terrorist GenerateRandomTerrorist()
+        {
+            Random Rand = new Random();
+            List<string> types = ProgramStaticData.StaticData.TypesAndMuchSensors.Keys.ToList();
+            string type = types.ElementAt(Rand.Next(types.Count));
+
+            Terrorist terrorist;
+
+            switch (type)
+            {
+                case "private":
+                    terrorist = GeneartePrivateTerrorist();
+                    break;
+
+                case "squad leader":
+                    terrorist = GenerateSquadLeaderTerrorist();
+                    break;
+
+                default:
+                    terrorist = GeneartePrivateTerrorist();
+                    break;
+            }
+            return terrorist;
+        }
+
+
+
         public static Terrorist GeneartePrivateTerrorist()
         {
-            int manySens = ProgramStaticData.StaticData.TypesAndMuchSensors["private"];
             Terrorist terrorist = new PrivateTerrorist();
+            return GenerateTerrorist("private", terrorist);
+        }
+
+        public static Terrorist GenerateSquadLeaderTerrorist()
+        {
+            Terrorist terrorist = new SquadLeaderTerrorist();
+            return GenerateTerrorist("squad leader", terrorist);
+        }
+        private static Terrorist GenerateTerrorist(string type, Terrorist terrorist)
+        {
+            int manySens = ProgramStaticData.StaticData.TypesAndMuchSensors[type];
             terrorist.WeaknesSensors = GeneraorSensor.GenerateSomeRandomSensors(manySens);
-            terrorist.Touched = new List<string>();
+            terrorist.Touched = new List<Sensor>();
             return terrorist;
         }
     }
