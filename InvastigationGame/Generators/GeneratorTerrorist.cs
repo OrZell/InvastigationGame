@@ -1,4 +1,5 @@
-﻿using InvastigationGame.Models.Terrorists;
+﻿using InvastigationGame.Models.Sensors;
+using InvastigationGame.Models.Terrorists;
 using System;
 using System.Collections.Generic;
 using System.Linq;
