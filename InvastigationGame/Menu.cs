@@ -7,9 +7,18 @@ namespace InvastigationGame
     public class Menu
     {
         private Terrorist Terrorist;
+        private bool AttackableTerrorist;
         public Menu()
         {
             this.Terrorist = GeneratorTerrorist.GenerateRandomTerrorist();
+            if (this.Terrorist is SquadLeaderTerrorist)
+            {
+                this.AttackableTerrorist = true;
+            }
+            else
+            {
+                this.AttackableTerrorist = false;
+            }
         }
 
         public void MainMenu()
@@ -57,12 +66,17 @@ namespace InvastigationGame
             UpdateTheTouched();
             nums = CheckLens();
             Console.WriteLine($"You got {nums[0]} / {nums[1]}");
+            UpdateThePulseSensors();
+            if (this.AttackableTerrorist)
+            {
+                IncreaseTheAttackCounter();
+            }
+
             return CheckIfTouched(nums);
         }
 
         public void Guess(string type)
         {
-            UpdateThePulseSensors();
             foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
             {
                 if (sensor.Type == type && !sensor.Active)
@@ -113,6 +127,16 @@ namespace InvastigationGame
                     psensor.Countering();
                     break;
                 }
+            }
+        }
+
+        private void IncreaseTheAttackCounter()
+        {
+            if (this.AttackableTerrorist)
+            {
+                SquadLeaderTerrorist terrorist = (SquadLeaderTerrorist)this.Terrorist;
+                terrorist.Attack();
+
             }
         }
     }

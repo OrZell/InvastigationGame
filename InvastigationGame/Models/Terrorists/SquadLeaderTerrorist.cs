@@ -12,10 +12,15 @@ namespace InvastigationGame.Models.Terrorists
 
         public void Attack()
         {
-            if (AttackCounter == 3)
+            if (AttackCounter < 2)
+            {
+                this.AttackCounter++;
+            }
+            else
             {
                 RemoveActive();
                 AttackCounter = 0;
+
             }
         }
 
