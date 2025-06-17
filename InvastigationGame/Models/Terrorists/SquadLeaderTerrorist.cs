@@ -5,21 +5,24 @@ namespace InvastigationGame.Models.Terrorists
     public class SquadLeaderTerrorist : Terrorist
     {
         public int AttackCounter;
+        public int MaxAttackCounter;
         public SquadLeaderTerrorist() : base("squad leader")
         {
+            this._Capacity = 4;
             this.AttackCounter = 0;
+            this.MaxAttackCounter = 3;
         }
 
         public void Attack()
         {
-            if (AttackCounter < 2)
+            if (AttackCounter < this.MaxAttackCounter-1)
             {
                 this.AttackCounter++;
             }
             else
             {
                 RemoveActive(OrganizeActiveSensors());
-                AttackCounter = 0;
+                this.AttackCounter = 0;
             }
         }
 

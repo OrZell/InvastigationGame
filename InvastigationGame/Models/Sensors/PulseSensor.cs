@@ -1,4 +1,6 @@
-﻿namespace InvastigationGame.Models.Sensors
+﻿using InvastigationGame.Models.Terrorists;
+
+namespace InvastigationGame.Models.Sensors
 {
     public class PulseSensor : Sensor
     {
@@ -8,7 +10,7 @@
             get { return _AttackCounter; }
             set { _AttackCounter = value; }
         }
-        public PulseSensor() : base("pulse")
+        public PulseSensor(Terrorist terrorist) : base("pulse", terrorist)
         {
             this._AttackCounter = 0;
         }
@@ -17,11 +19,6 @@
         {
             this._Active = true;
             this._AttackCounter = 0;
-        }
-
-        public void Disactive()
-        {
-            this._Active = false;
         }
 
         public void Countering()
@@ -33,7 +30,7 @@
             else
             {
                 this._AttackCounter = 0;
-                this.Disactive();
+                this._Active = false;
             }
         }
     }

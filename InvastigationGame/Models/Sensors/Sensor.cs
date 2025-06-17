@@ -1,4 +1,6 @@
-﻿namespace InvastigationGame.Models.Sensors
+﻿using InvastigationGame.Models.Terrorists;
+
+namespace InvastigationGame.Models.Sensors
 {
     public class Sensor
     {
@@ -16,9 +18,17 @@
             set { _Active = value; }
         }
 
-        public Sensor(string type)
+        protected Terrorist _OwnerTerrorist;
+        public Terrorist OwnerTerrorist
+        {
+            get { return _OwnerTerrorist; }
+            set { _OwnerTerrorist = value; }
+        }
+
+        public Sensor(string type, Terrorist terrorist)
         {
             this._Type = type;
+            this._OwnerTerrorist = terrorist;
             this._Active = false;
         }
 

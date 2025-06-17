@@ -11,7 +11,7 @@ namespace InvastigationGame
         public Menu()
         {
             this.Terrorist = GeneratorTerrorist.GenerateRandomTerrorist();
-            if (this.Terrorist is SquadLeaderTerrorist)
+            if (ProgramStaticData.StaticData.TypesAttackbleTerrorist.Contains(this.Terrorist.Type))
             {
                 this.AttackableTerrorist = true;
             }
@@ -31,7 +31,11 @@ namespace InvastigationGame
                   "2. Lighting\n" +
                   "3. Selolar\n" +
                   "4. Pulse\n" +
-                  "5. Exit");
+                  "5. Magnet\n" +
+                  "6. Termal\n" +
+                  "7. Signal\n" +
+                  "8. Exit\n"
+                  );
                 string input = Console.ReadLine()!;
 
                 switch (input)
@@ -53,6 +57,18 @@ namespace InvastigationGame
                         break;
 
                     case "5":
+                        sign = Flow("magnet");
+                        break;
+
+                    case "6":
+                        sign = Flow("termal");
+                        break;
+
+                    case "7":
+                        sign = Flow("signal");
+                        break;
+
+                    case "8":
                         sign = false;
                         break;
 
@@ -71,12 +87,10 @@ namespace InvastigationGame
             UpdateTheTouched();
             nums = CheckLens();
             Console.WriteLine($"You got {nums[0]} / {nums[1]}");
-            UpdateThePulseSensors();
             if (this.AttackableTerrorist)
             {
                 IncreaseTheAttackCounter();
             }
-
             return CheckIfTouched(nums);
         }
 
@@ -141,7 +155,6 @@ namespace InvastigationGame
             {
                 SquadLeaderTerrorist terrorist = (SquadLeaderTerrorist)this.Terrorist;
                 terrorist.Attack();
-
             }
         }
     }

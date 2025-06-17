@@ -16,7 +16,7 @@ namespace InvastigationGame.Generators
             switch (type)
             {
                 case "foot":
-                    terrorist = GeneartePrivateTerrorist();
+                    terrorist = GenearteFootTerrorist();
                     break;
 
                 case "squad leader":
@@ -32,7 +32,7 @@ namespace InvastigationGame.Generators
                     break;
 
                 default:
-                    terrorist = GeneartePrivateTerrorist();
+                    terrorist = GenearteFootTerrorist();
                     break;
             }
             return terrorist;
@@ -40,10 +40,10 @@ namespace InvastigationGame.Generators
 
 
 
-        public static Terrorist GeneartePrivateTerrorist()
+        public static Terrorist GenearteFootTerrorist()
         {
             Terrorist terrorist = new FootTerrorist();
-            return GenerateTerrorist("private", terrorist);
+            return GenerateTerrorist("foot", terrorist);
         }
 
         public static Terrorist GenerateSquadLeaderTerrorist()
@@ -66,8 +66,7 @@ namespace InvastigationGame.Generators
 
         private static Terrorist GenerateTerrorist(string type, Terrorist terrorist)
         {
-            int manySens = ProgramStaticData.StaticData.TypesAndMuchSensors[type];
-            terrorist.WeaknesSensors = GeneraorSensor.GenerateSomeRandomSensors(manySens);
+            terrorist.WeaknesSensors = GeneraorSensor.GenerateSomeRandomSensors(terrorist);
             terrorist.Touched = new List<Sensor>();
             return terrorist;
         }

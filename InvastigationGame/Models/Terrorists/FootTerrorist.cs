@@ -4,7 +4,7 @@
     {
         public FootTerrorist() : base("foot")
         {
-
+            this._Capacity = 2;
         }
     }
 }
