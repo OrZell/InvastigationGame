@@ -2,33 +2,33 @@
 
 namespace InvastigationGame.Models.Terrorists
 {
-    public class SquadLeaderTerrorist : Terrorist
+    public class SeniorCommanderTerrorist : Terrorist
     {
         public int AttackCounter;
-        public SquadLeaderTerrorist() : base("squad leader")
+
+        public SeniorCommanderTerrorist() : base("senior commander")
         {
             this.AttackCounter = 0;
         }
 
         public void Attack()
         {
-            if (AttackCounter < 2)
+            if (this.AttackCounter < 2)
             {
                 this.AttackCounter++;
             }
             else
             {
-                RemoveActive(OrganizeActiveSensors());
-                AttackCounter = 0;
+                this.RemoveActive(OrganizeActiveSensor());
+                this.AttackCounter = 0;
             }
         }
 
-
-        public List<Sensor> OrganizeActiveSensors()
+        public List<Sensor> OrganizeActiveSensor()
         {
             List<Sensor> ActiveSensors = new List<Sensor>();
 
-            foreach (Sensor sensor in WeaknesSensors)
+            foreach (Sensor sensor in this.WeaknesSensors)
             {
                 if (sensor.Active)
                 {
@@ -37,16 +37,19 @@ namespace InvastigationGame.Models.Terrorists
             }
             return ActiveSensors;
         }
-        public void RemoveActive(List<Sensor> ActiveSensors, int HowMany=1)
+
+        public void RemoveActive(List<Sensor> ActiveSensors, int HowMany = 2)
         {
             Random Rand = new Random();
             int minOption = int.Min(HowMany, ActiveSensors.Count);
+
             for (int i = 0; i < minOption; i++)
             {
                 Sensor sen = ActiveSensors.ElementAt(Rand.Next(ActiveSensors.Count));
                 sen.Active = false;
                 ActiveSensors.Remove(sen);
             }
+
         }
     }
 }
