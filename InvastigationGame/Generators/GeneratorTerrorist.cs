@@ -27,6 +27,10 @@ namespace InvastigationGame.Generators
                     terrorist = GenerateSeniorCommanderTerrorist();
                     break;
 
+                case "organization leader":
+                    terrorist = GenerateOrganizationLeaderterrorist();
+                    break;
+
                 default:
                     terrorist = GeneartePrivateTerrorist();
                     break;
@@ -52,6 +56,12 @@ namespace InvastigationGame.Generators
         {
             Terrorist terrorist = new SeniorCommanderTerrorist();
             return GenerateTerrorist("senior commander", terrorist);
+        }
+
+        public static Terrorist GenerateOrganizationLeaderterrorist()
+        {
+            Terrorist terrorist = new OrganizationLeaderTerrorist();
+            return GenerateTerrorist("organization leader", terrorist);
         }
 
         private static Terrorist GenerateTerrorist(string type, Terrorist terrorist)

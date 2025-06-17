@@ -2,25 +2,36 @@
 
 namespace InvastigationGame.Models.Terrorists
 {
-    public class SeniorCommanderTerrorist : Terrorist
+    public class OrganizationLeaderTerrorist : Terrorist
     {
         public int AttackCounter;
+        public int WholeResetCounter;
 
-        public SeniorCommanderTerrorist() : base("senior commander")
+        public OrganizationLeaderTerrorist() : base("organization leader")
         {
             this.AttackCounter = 0;
+            this.WholeResetCounter = 0;
         }
 
         public void Attack()
         {
-            if (this.AttackCounter < 2)
+            if (this.WholeResetCounter < 9)
             {
-                this.AttackCounter++;
+                this.WholeResetCounter++;
+
+                if (this.AttackCounter < 2)
+                {
+                    this.AttackCounter++;
+                }
+                else
+                {
+                    RemoveActive(OrganizeActiveSensor());
+                    this.AttackCounter = 0;
+                }
             }
             else
             {
-                this.RemoveActive(OrganizeActiveSensor());
-                this.AttackCounter = 0;
+                TurnOffAll();
             }
         }
 
@@ -38,7 +49,7 @@ namespace InvastigationGame.Models.Terrorists
             return ActiveSensors;
         }
 
-        public void RemoveActive(List<Sensor> ActiveSensors, int HowMany = 2)
+        public void RemoveActive(List<Sensor> ActiveSensors, int HowMany = 1)
         {
             Random Rand = new Random();
             int minOption = int.Min(HowMany, ActiveSensors.Count);
@@ -49,7 +60,14 @@ namespace InvastigationGame.Models.Terrorists
                 sen.Active = false;
                 ActiveSensors.Remove(sen);
             }
+        }
 
+        public void TurnOffAll()
+        {
+            foreach (Sensor sensor in this.WeaknesSensors)
+            {
+                sensor.Active = false;
+            }
         }
     }
 }

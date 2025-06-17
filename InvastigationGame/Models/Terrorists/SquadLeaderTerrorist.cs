@@ -4,10 +4,10 @@ namespace InvastigationGame.Models.Terrorists
 {
     public class SquadLeaderTerrorist : Terrorist
     {
-        public int AttackCounter = 0;
+        public int AttackCounter;
         public SquadLeaderTerrorist() : base("squad leader")
         {
-
+            this.AttackCounter = 0;
         }
 
         public void Attack()
