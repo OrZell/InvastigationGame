@@ -1,0 +1,10 @@
+﻿namespace InvastigationGame.Models.Terrorists
+{
+    public class FootTerrorist : Terrorist
+    {
+        public FootTerrorist() : base("foot")
+        {
+
+        }
+    }
+}

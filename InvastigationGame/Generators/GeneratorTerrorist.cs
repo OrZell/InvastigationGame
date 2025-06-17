@@ -15,12 +15,16 @@ namespace InvastigationGame.Generators
 
             switch (type)
             {
-                case "private":
+                case "foot":
                     terrorist = GeneartePrivateTerrorist();
                     break;
 
                 case "squad leader":
                     terrorist = GenerateSquadLeaderTerrorist();
+                    break;
+
+                case "senior commander":
+                    terrorist = GenerateSeniorCommanderTerrorist();
                     break;
 
                 default:
@@ -34,7 +38,7 @@ namespace InvastigationGame.Generators
 
         public static Terrorist GeneartePrivateTerrorist()
         {
-            Terrorist terrorist = new PrivateTerrorist();
+            Terrorist terrorist = new FootTerrorist();
             return GenerateTerrorist("private", terrorist);
         }
 
@@ -43,6 +47,13 @@ namespace InvastigationGame.Generators
             Terrorist terrorist = new SquadLeaderTerrorist();
             return GenerateTerrorist("squad leader", terrorist);
         }
+
+        public static Terrorist GenerateSeniorCommanderTerrorist()
+        {
+            Terrorist terrorist = new SeniorCommanderTerrorist();
+            return GenerateTerrorist("senior commander", terrorist);
+        }
+
         private static Terrorist GenerateTerrorist(string type, Terrorist terrorist)
         {
             int manySens = ProgramStaticData.StaticData.TypesAndMuchSensors[type];

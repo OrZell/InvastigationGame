@@ -18,16 +18,15 @@ namespace InvastigationGame.Models.Terrorists
             }
             else
             {
-                RemoveActive();
+                RemoveActive(OrganizeActiveSensors());
                 AttackCounter = 0;
-
             }
         }
 
-        public void RemoveActive()
+
+        public List<Sensor> OrganizeActiveSensors()
         {
             List<Sensor> ActiveSensors = new List<Sensor>();
-            Random Rand = new Random();
 
             foreach (Sensor sensor in WeaknesSensors)
             {
@@ -36,9 +35,18 @@ namespace InvastigationGame.Models.Terrorists
                     ActiveSensors.Add(sensor);
                 }
             }
-
-            Sensor sen = ActiveSensors.ElementAt(Rand.Next(ActiveSensors.Count));
-            sen.Active = false;
+            return ActiveSensors;
+        }
+        public void RemoveActive(List<Sensor> ActiveSensors, int HowMany=1)
+        {
+            Random Rand = new Random();
+            int minOption = int.Min(HowMany, ActiveSensors.Count);
+            for (int i = 0; i < minOption; i++)
+            {
+                Sensor sen = ActiveSensors.ElementAt(Rand.Next(ActiveSensors.Count));
+                sen.Active = false;
+                ActiveSensors.Remove(sen);
+            }
         }
     }
 }

@@ -30,7 +30,8 @@ namespace InvastigationGame
                   "1. Movement\n" +
                   "2. Lighting\n" +
                   "3. Selolar\n" +
-                  "4. Pulse");
+                  "4. Pulse\n" +
+                  "5. Exit");
                 string input = Console.ReadLine()!;
 
                 switch (input)
@@ -49,6 +50,10 @@ namespace InvastigationGame
 
                     case "4":
                         sign = Flow("pulse");
+                        break;
+
+                    case "5":
+                        sign = false;
                         break;
 
                     default:
