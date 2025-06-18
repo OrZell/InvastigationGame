@@ -1,4 +1,6 @@
-﻿namespace InvastigationGame.ProgramStaticData
+﻿using InvastigationGame.Models.Terrorists;
+
+namespace InvastigationGame.ProgramStaticData
 {
     public class StaticData
     {
@@ -15,7 +17,17 @@
             "movement", 
             "lighting", 
             "selolar", 
-            "pulse"
+            "pulse",
+            "termal",
+            "magnet",
+            "signal",
+        };
+
+        public static List<string> TypesAttackbleTerrorist = new List<string>()
+        {
+            "squad leader",
+            "senior commander",
+            "organization leader"
         };
     }
 }

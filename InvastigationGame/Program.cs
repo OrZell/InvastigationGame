@@ -4,8 +4,10 @@
     {
         static void Main(string[] args)
         {
+            Player player = Player.CreateUser();
             Menu menu = new Menu();
-            menu.MainMenu();
+            GameManager game = new GameManager(menu, player);
+            game.StartGame();
         }
     }
 }

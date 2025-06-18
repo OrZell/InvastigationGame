@@ -1,4 +1,6 @@
-﻿namespace InvastigationGame.Models.Sensors
+﻿using InvastigationGame.Models.Terrorists;
+
+namespace InvastigationGame.Models.Sensors
 {
     public class Sensor
     {

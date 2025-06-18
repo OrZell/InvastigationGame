@@ -2,9 +2,9 @@
 
 namespace InvastigationGame.Models.Sensors
 {
-    public class SelolarSensor : Sensor
+    public class TermalSensor : Sensor
     {
-        public SelolarSensor() : base("selolar")
+        public TermalSensor() : base("termal")
         {
 
         }

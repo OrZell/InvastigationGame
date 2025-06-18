@@ -4,16 +4,16 @@ namespace InvastigationGame.Models.Terrorists
 {
     public class SeniorCommanderTerrorist : Terrorist
     {
-        public int AttackCounter;
-
         public SeniorCommanderTerrorist() : base("senior commander")
         {
+            this._Capacity = 6;
             this.AttackCounter = 0;
+            this.MaxAttackCounter = 3;
         }
 
-        public void Attack()
+        public override void Attack()
         {
-            if (this.AttackCounter < 2)
+            if (this.AttackCounter < this.MaxAttackCounter-1)
             {
                 this.AttackCounter++;
             }

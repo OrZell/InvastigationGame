@@ -6,24 +6,40 @@ namespace InvastigationGame
 {
     public class Menu
     {
-        private Terrorist Terrorist;
-        private bool AttackableTerrorist;
+        Terrorist terrorist;
+        int DefenceCounter;
         public Menu()
         {
-            this.Terrorist = GeneratorTerrorist.GenerateRandomTerrorist();
-            if (this.Terrorist is SquadLeaderTerrorist)
-            {
-                this.AttackableTerrorist = true;
-            }
-            else
-            {
-                this.AttackableTerrorist = false;
-            }
+
         }
 
-        public void MainMenu()
+        public string MainMenu(int CurrentLevel, Terrorist terrorist)
         {
+            string Exit = "";
             bool sign = true;
+
+            switch (CurrentLevel)
+            {
+                case 1:
+                    this.terrorist = (FootTerrorist)terrorist;
+                    break;
+
+                case 2:
+                    this.terrorist = (SquadLeaderTerrorist)terrorist;
+                    break;
+
+                case 3:
+                    this.terrorist = (SeniorCommanderTerrorist)terrorist;
+                    break;
+
+                case 4:
+                    this.terrorist = (OrganizationLeaderTerrorist)terrorist;
+                    break;
+
+                default:
+                    break;
+            }
+
             do
             {
                 Console.WriteLine("Guess The Sensor:\n" +
@@ -31,7 +47,11 @@ namespace InvastigationGame
                   "2. Lighting\n" +
                   "3. Selolar\n" +
                   "4. Pulse\n" +
-                  "5. Exit");
+                  "5. Magnet\n" +
+                  "6. Termal\n" +
+                  "7. Signal\n" +
+                  "8. Exit\n"
+                  );
                 string input = Console.ReadLine()!;
 
                 switch (input)
@@ -53,6 +73,19 @@ namespace InvastigationGame
                         break;
 
                     case "5":
+                        sign = Flow("magnet");
+                        break;
+
+                    case "6":
+                        sign = Flow("termal");
+                        break;
+
+                    case "7":
+                        sign = Flow("signal");
+                        break;
+
+                    case "8":
+                        Exit = "Exit";
                         sign = false;
                         break;
 
@@ -62,30 +95,42 @@ namespace InvastigationGame
                 }
             }
             while (sign);
+            return Exit;
         }
         public bool Flow(string type)
         {
             int[] nums = new int[2];
-
             Guess(type);
             UpdateTheTouched();
             nums = CheckLens();
             Console.WriteLine($"You got {nums[0]} / {nums[1]}");
+
             UpdateThePulseSensors();
-            if (this.AttackableTerrorist)
-            {
-                IncreaseTheAttackCounter();
-            }
+            IncreaseTheAttackCounter();
 
             return CheckIfTouched(nums);
         }
 
         public void Guess(string type)
         {
-            foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
+            foreach (Sensor sensor in this.terrorist.WeaknesSensors)
             {
                 if (sensor.Type == type && !sensor.Active)
                 {
+                    if (sensor.Type == "magnet")
+                    {
+                        this.DefenceCounter += 2;
+                    }
+
+                    if (sensor.Type == "termal")
+                    {
+                        Console.WriteLine(UncoverOneSensor());
+                    }
+
+                    if (sensor.Type == "signal")
+                    {
+                        Console.WriteLine($"The Terrorist Type Is: {this.terrorist.Type}");
+                    }
                     sensor.Activate();
                     break;
                 }
@@ -95,8 +140,8 @@ namespace InvastigationGame
         public int[] CheckLens()
         {
             int[] lens = new int[2];
-            lens[0] = this.Terrorist.Touched.Count;
-            lens[1] = this.Terrorist.WeaknesSensors.Count;
+            lens[0] = this.terrorist.Touched.Count;
+            lens[1] = this.terrorist.WeaknesSensors.Count;
             return lens;
         }
 
@@ -112,19 +157,19 @@ namespace InvastigationGame
 
         public void UpdateTheTouched()
         {
-            this.Terrorist.Touched.Clear();
-            foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
+            this.terrorist.Touched.Clear();
+            foreach (Sensor sensor in this.terrorist.WeaknesSensors)
             {
                 if (sensor.Active == true)
                 {
-                    this.Terrorist.Touched.Add(sensor);
+                    this.terrorist.Touched.Add(sensor);
                 }
             }
         }
 
         private void UpdateThePulseSensors()
         {
-            foreach (Sensor sensor in this.Terrorist.WeaknesSensors)
+            foreach (Sensor sensor in this.terrorist.WeaknesSensors)
             {
                 if (sensor is PulseSensor && sensor.Active)
                 {
@@ -137,12 +182,40 @@ namespace InvastigationGame
 
         private void IncreaseTheAttackCounter()
         {
-            if (this.AttackableTerrorist)
+            if (this.DefenceCounter > 0)
             {
-                SquadLeaderTerrorist terrorist = (SquadLeaderTerrorist)this.Terrorist;
-                terrorist.Attack();
-
+                this.DefenceCounter--;
             }
+            else
+            {
+                this.terrorist.Attack();
+            }
+        }
+
+        public string UncoverOneSensor()
+        {
+            List<Sensor> NotActivateSensors = new List<Sensor>();
+            Random Rand = new Random();
+            string result;
+
+            foreach (Sensor sensor in this.terrorist.WeaknesSensors)
+            {
+                if (!sensor.Active)
+                {
+                    NotActivateSensors.Add(sensor);
+                }
+            }
+
+            if (NotActivateSensors.Count > 0)
+            {
+                Sensor sen = NotActivateSensors.ElementAt(Rand.Next(NotActivateSensors.Count));
+                result = $"The Target Got The Sensor Type: {sen.Type}";
+            }
+            else
+            {
+                result = "Not Found Sensor To Discover";
+            }
+            return result;
         }
     }
 }

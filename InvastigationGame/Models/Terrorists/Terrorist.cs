@@ -4,21 +4,31 @@ namespace InvastigationGame.Models.Terrorists
 {
     public class Terrorist
     {
-        private List<Sensor> _WeaknesSensors;
+        public int AttackCounter;
+        public int MaxAttackCounter;
+
+        protected int _Capacity;
+        public int Capacity
+        {
+            get { return _Capacity; }
+            set { _Capacity = value; }
+        }
+
+        protected List<Sensor> _WeaknesSensors;
         public List<Sensor> WeaknesSensors
         {
             get { return _WeaknesSensors; }
             set { _WeaknesSensors = value; }
         }
 
-        private List<Sensor> _Touched;
+        protected List<Sensor> _Touched;
         public List<Sensor> Touched
         {
             get { return _Touched; }
             set { _Touched = value; }
         }
 
-        private string _Type;
+        protected string _Type;
         public string Type
         {
             get { return _Type; }
@@ -28,6 +38,11 @@ namespace InvastigationGame.Models.Terrorists
         public Terrorist(string type)
         {
             this._Type = type;
+        }
+
+        public virtual void Attack()
+        {
+
         }
     }
 }
