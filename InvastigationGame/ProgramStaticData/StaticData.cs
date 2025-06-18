@@ -19,7 +19,7 @@ namespace InvastigationGame.ProgramStaticData
             "selolar", 
             "pulse",
             "termal",
-            "magnetic",
+            "magnet",
             "signal",
         };
 

@@ -4,11 +4,8 @@ namespace InvastigationGame.Models.Terrorists
 {
     public class OrganizationLeaderTerrorist : Terrorist
     {
-        public int AttackCounter;
-        public int MaxAttackCounter;
         public int WholeResetCounter;
         public int MaxWholeResetCounter;
-
         public OrganizationLeaderTerrorist() : base("organization leader")
         {
             this._Capacity = 8;
@@ -18,7 +15,7 @@ namespace InvastigationGame.Models.Terrorists
             this.MaxWholeResetCounter = 10;
         }
 
-        public void Attack()
+        public override void Attack()
         {
             if (this.WholeResetCounter < this.MaxWholeResetCounter-1)
             {

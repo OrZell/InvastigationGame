@@ -43,28 +43,28 @@ namespace InvastigationGame.Generators
         public static Terrorist GenearteFootTerrorist()
         {
             Terrorist terrorist = new FootTerrorist();
-            return GenerateTerrorist("foot", terrorist);
+            return GenerateTerrorist(terrorist);
         }
 
         public static Terrorist GenerateSquadLeaderTerrorist()
         {
             Terrorist terrorist = new SquadLeaderTerrorist();
-            return GenerateTerrorist("squad leader", terrorist);
+            return GenerateTerrorist(terrorist);
         }
 
         public static Terrorist GenerateSeniorCommanderTerrorist()
         {
             Terrorist terrorist = new SeniorCommanderTerrorist();
-            return GenerateTerrorist("senior commander", terrorist);
+            return GenerateTerrorist(terrorist);
         }
 
         public static Terrorist GenerateOrganizationLeaderterrorist()
         {
             Terrorist terrorist = new OrganizationLeaderTerrorist();
-            return GenerateTerrorist("organization leader", terrorist);
+            return GenerateTerrorist(terrorist);
         }
 
-        private static Terrorist GenerateTerrorist(string type, Terrorist terrorist)
+        private static Terrorist GenerateTerrorist(Terrorist terrorist)
         {
             terrorist.WeaknesSensors = GeneraorSensor.GenerateSomeRandomSensors(terrorist);
             terrorist.Touched = new List<Sensor>();

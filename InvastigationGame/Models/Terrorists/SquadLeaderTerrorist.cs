@@ -4,8 +4,6 @@ namespace InvastigationGame.Models.Terrorists
 {
     public class SquadLeaderTerrorist : Terrorist
     {
-        public int AttackCounter;
-        public int MaxAttackCounter;
         public SquadLeaderTerrorist() : base("squad leader")
         {
             this._Capacity = 4;
@@ -13,7 +11,7 @@ namespace InvastigationGame.Models.Terrorists
             this.MaxAttackCounter = 3;
         }
 
-        public void Attack()
+        public override void Attack()
         {
             if (AttackCounter < this.MaxAttackCounter-1)
             {

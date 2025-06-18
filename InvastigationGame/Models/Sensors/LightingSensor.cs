@@ -4,7 +4,7 @@ namespace InvastigationGame.Models.Sensors
 {
     public class LightingSensor : Sensor
     {
-        public LightingSensor(Terrorist terrorist) : base("lighting", terrorist)
+        public LightingSensor() : base("lighting")
         {
 
         }

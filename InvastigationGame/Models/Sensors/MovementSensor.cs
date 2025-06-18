@@ -4,7 +4,7 @@ namespace InvastigationGame.Models.Sensors
 {
     public class MovementSensor : Sensor
     {
-        public MovementSensor(Terrorist terrorist) : base("movement", terrorist)
+        public MovementSensor() : base("movement")
         {
 
         }

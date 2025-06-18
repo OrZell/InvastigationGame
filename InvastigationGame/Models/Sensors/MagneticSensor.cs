@@ -5,14 +5,9 @@ namespace InvastigationGame.Models.Sensors
     public class MagneticSensor : Sensor
     {
         public int DefenceCounter;
-        public MagneticSensor(Terrorist terrorist) : base("magnetic", terrorist)
+        public MagneticSensor() : base("magnet")
         {
             this.DefenceCounter = 2;
-        }
-
-        public void DefenceFromTheTerrorirst()
-        {
-            
         }
     }
 }

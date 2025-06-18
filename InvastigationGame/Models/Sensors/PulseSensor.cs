@@ -10,7 +10,7 @@ namespace InvastigationGame.Models.Sensors
             get { return _AttackCounter; }
             set { _AttackCounter = value; }
         }
-        public PulseSensor(Terrorist terrorist) : base("pulse", terrorist)
+        public PulseSensor() : base("pulse")
         {
             this._AttackCounter = 0;
         }

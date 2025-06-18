@@ -9,7 +9,7 @@ namespace InvastigationGame.Models.Sensors
 {
     public class SignalSensor : Sensor
     {
-        public SignalSensor(Terrorist terrorist) : base("signal", terrorist)
+        public SignalSensor() : base("signal")
         {
 
         }

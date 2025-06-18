@@ -15,48 +15,48 @@ namespace InvastigationGame.Generators
             for (int i = 0; i < terrorist.Capacity; i++)
             {
                 string type = types.ElementAt(Rand.Next(types.Count));
-                Sensor sensor = CreateSensor(type, terrorist);
+                Sensor sensor = CreateSensor(type);
                 sensors.Add(sensor);
             }
             return sensors;
         }
 
-        public static Sensor CreateSensor(string type, Terrorist terrorist)
+        public static Sensor CreateSensor(string type)
         {
             Sensor sensor;
 
             switch (type)
             {
                 case "movement":
-                    sensor = new MovementSensor(terrorist);
+                    sensor = new MovementSensor();
                     break;
 
                 case "lighing":
-                    sensor = new LightingSensor(terrorist);
+                    sensor = new LightingSensor();
                     break;
 
                 case "selolar":
-                    sensor = new SelolarSensor(terrorist);
+                    sensor = new SelolarSensor();
                     break;
 
                 case "pulse":
-                    sensor = new PulseSensor(terrorist);
+                    sensor = new PulseSensor();
                     break;
 
                 case "magnet":
-                    sensor = new MagneticSensor(terrorist);
+                    sensor = new MagneticSensor();
                     break;
 
                 case "termal":
-                    sensor = new TermalSensor(terrorist);
+                    sensor = new TermalSensor();
                     break;
 
                 case "signal":
-                    sensor = new SignalSensor(terrorist);
+                    sensor = new SignalSensor();
                     break;
 
                 default:
-                    sensor = new Sensor(type, terrorist);
+                    sensor = new Sensor(type);
                     break;
             }
             return sensor;

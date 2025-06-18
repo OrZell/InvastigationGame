@@ -4,6 +4,9 @@ namespace InvastigationGame.Models.Terrorists
 {
     public class Terrorist
     {
+        public int AttackCounter;
+        public int MaxAttackCounter;
+
         protected int _Capacity;
         public int Capacity
         {
@@ -35,6 +38,11 @@ namespace InvastigationGame.Models.Terrorists
         public Terrorist(string type)
         {
             this._Type = type;
+        }
+
+        public virtual void Attack()
+        {
+
         }
     }
 }
