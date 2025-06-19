@@ -1,1 +1,8 @@
-﻿
+﻿CREATE DATABASE Invastigation_Game CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+CREATE TABLE Players
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR (50) UNIQUE,
+    level INT DEFAULT 1 CHECK (level BETWEEN 1 AND 5)
+);
