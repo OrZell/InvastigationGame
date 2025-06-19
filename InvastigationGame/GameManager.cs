@@ -1,5 +1,6 @@
 ﻿using InvastigationGame.Models.Terrorists;
 using InvastigationGame.Generators;
+using InvastigationGame.PlayerDal;
 
 namespace InvastigationGame
 {
@@ -7,17 +8,20 @@ namespace InvastigationGame
     {
         public int CurrentLevel;
         public Menu menu;
-        public Player player;
+        public PlayerDAL PDA;
 
-        public GameManager(Menu menu, Player player)
+
+        public GameManager()
         {
             this.CurrentLevel = 1;
-            this.menu = menu;
-            this.player = player;
+            this.menu = new Menu();
+            this.PDA = new PlayerDAL();
         }
 
-        public Player StartGame()
+        public void StartGame()
         {
+            Player player = GeneratePlayer();
+            this.CurrentLevel = player.Level;
             string Exit = "";
             bool DoneAll = false;
             while (!DoneAll)
@@ -30,10 +34,11 @@ namespace InvastigationGame
                         Exit = this.menu.MainMenu(this.CurrentLevel, footTerrorist);
                         if (Exit == "Exit")
                         {
-                            return this.player;
+                            SaveGame(player);
+                            return;
                         }
                         this.CurrentLevel++;
-                        this.player.Level = this.CurrentLevel;
+                        player.Level = this.CurrentLevel;
                         break;
 
                     case 2:
@@ -42,10 +47,11 @@ namespace InvastigationGame
                          Exit = this.menu.MainMenu(this.CurrentLevel, squadLeaderTerrorist);
                         if (Exit == "Exit")
                         {
-                            return this.player;
+                            SaveGame(player);
+                            return;
                         }
                         this.CurrentLevel++;
-                        this.player.Level = this.CurrentLevel;
+                        player.Level = this.CurrentLevel;
                         break;
 
                     case 3:
@@ -54,10 +60,11 @@ namespace InvastigationGame
                         Exit = this.menu.MainMenu(this.CurrentLevel, seniorCommanderTerrorist);
                         if (Exit == "Exit")
                         {
-                            return this.player;
+                            SaveGame(player);
+                            return;
                         }
                         this.CurrentLevel++;
-                        this.player.Level = this.CurrentLevel;
+                        player.Level = this.CurrentLevel;
                         break;
 
                     case 4:
@@ -66,10 +73,11 @@ namespace InvastigationGame
                         Exit = this.menu.MainMenu(this.CurrentLevel, organizationLeaderTerrorist);
                         if (Exit == "Exit")
                         {
-                            return this.player;
+                            SaveGame(player);
+                            return;
                         }
                         this.CurrentLevel++;
-                        this.player.Level = this.CurrentLevel;
+                        player.Level = this.CurrentLevel;
                         DoneAll = true;
                         break;
 
@@ -78,7 +86,23 @@ namespace InvastigationGame
                 }
             }
             Console.WriteLine("You Done All");
-            return this.player;
+        }
+
+        public void SaveGame(Player player)
+        {
+            this.PDA.UpdateLevel(player);
+        }
+
+        public Player GeneratePlayer()
+        {
+            string Name = Player.EnterUserName();
+            Player player = this.PDA.FindByName(Name);
+            if (player == null)
+            {
+                player = new Player(Name);
+                this.PDA.AddPlayer(player);
+            }
+            return player;
         }
     }
 }

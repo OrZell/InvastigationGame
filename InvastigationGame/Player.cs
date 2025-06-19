@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InvastigationGame.PlayerDal;
 
 namespace InvastigationGame
 { 
@@ -17,11 +13,11 @@ namespace InvastigationGame
             this.Level = level;
         }
 
-        public static Player CreateUser()
+        public static string EnterUserName()
         {
             Console.WriteLine("Enter Your Name");
             string Name = Console.ReadLine()!;
-            return new Player(Name);
+            return Name;
         }
     }
 }
